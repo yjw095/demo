@@ -1,0 +1,562 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.example.demo.dao.CommentMapper" >
+  <resultMap id="BaseResultMap" type="com.example.demo.domain.Comment" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="p_id" property="pId" jdbcType="VARCHAR" />
+    <result column="target_type" property="targetType" jdbcType="INTEGER" />
+    <result column="target_id" property="targetId" jdbcType="VARCHAR" />
+    <result column="target_name" property="targetName" jdbcType="VARCHAR" />
+    <result column="score_1" property="score1" jdbcType="DECIMAL" />
+    <result column="score_2" property="score2" jdbcType="DECIMAL" />
+    <result column="score_3" property="score3" jdbcType="DECIMAL" />
+    <result column="score_4" property="score4" jdbcType="DECIMAL" />
+    <result column="score_5" property="score5" jdbcType="DECIMAL" />
+    <result column="score_final" property="scoreFinal" jdbcType="DECIMAL" />
+    <result column="img_count" property="imgCount" jdbcType="INTEGER" />
+    <result column="reply_count" property="replyCount" jdbcType="INTEGER" />
+    <result column="like_count" property="likeCount" jdbcType="INTEGER" />
+    <result column="unlike_count" property="unlikeCount" jdbcType="INTEGER" />
+    <result column="against_count" property="againstCount" jdbcType="INTEGER" />
+    <result column="against_state" property="againstState" jdbcType="VARCHAR" />
+    <result column="owner_user_id" property="ownerUserId" jdbcType="VARCHAR" />
+    <result column="avatar" property="avatar" jdbcType="VARCHAR" />
+    <result column="owner_user_login_name" property="ownerUserLoginName" jdbcType="VARCHAR" />
+    <result column="owner_user_nick_name" property="ownerUserNickName" jdbcType="VARCHAR" />
+    <result column="target_user_id" property="targetUserId" jdbcType="VARCHAR" />
+    <result column="target_user_nick_name" property="targetUserNickName" jdbcType="VARCHAR" />
+    <result column="stick" property="stick" jdbcType="INTEGER" />
+    <result column="highlight" property="highlight" jdbcType="INTEGER" />
+    <result column="audit_state" property="auditState" jdbcType="INTEGER" />
+    <result column="del_state" property="delState" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="BIGINT" />
+    <result column="sharding_id" property="shardingId" jdbcType="VARCHAR" />
+    <result column="residential_id" property="residentialId" jdbcType="VARCHAR" />
+    <result column="residential_name" property="residentialName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="BIGINT" />
+    <result column="comment_tag" property="commentTag" jdbcType="VARCHAR" />
+    <result column="terminal" property="terminal" jdbcType="VARCHAR" />
+    <result column="against_time" property="againstTime" jdbcType="BIGINT" />
+    <result column="district_id" property="districtId" jdbcType="VARCHAR" />
+    <result column="district_name" property="districtName" jdbcType="VARCHAR" />
+    <result column="pinyin" property="pinyin" jdbcType="VARCHAR" />
+    <result column="public_time" property="publicTime" jdbcType="BIGINT" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.example.demo.domain.Comment" extends="BaseResultMap" >
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, p_id, target_type, target_id, target_name, score_1, score_2, score_3, score_4, 
+    score_5, score_final, img_count, reply_count, like_count, unlike_count, against_count, 
+    against_state, owner_user_id, avatar, owner_user_login_name, owner_user_nick_name, 
+    target_user_id, target_user_nick_name, stick, highlight, audit_state, del_state, 
+    create_time, sharding_id, residential_id, residential_name, update_time, comment_tag, 
+    terminal, against_time, district_id, district_name, pinyin, public_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    content
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from comment
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from comment
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.example.demo.domain.Comment" >
+    insert into comment (id, p_id, target_type, 
+      target_id, target_name, score_1, 
+      score_2, score_3, score_4, 
+      score_5, score_final, img_count, 
+      reply_count, like_count, unlike_count, 
+      against_count, against_state, owner_user_id, 
+      avatar, owner_user_login_name, owner_user_nick_name, 
+      target_user_id, target_user_nick_name, stick, 
+      highlight, audit_state, del_state, 
+      create_time, sharding_id, residential_id, 
+      residential_name, update_time, comment_tag, 
+      terminal, against_time, district_id, 
+      district_name, pinyin, public_time, 
+      content)
+    values (#{id,jdbcType=VARCHAR}, #{pId,jdbcType=VARCHAR}, #{targetType,jdbcType=INTEGER}, 
+      #{targetId,jdbcType=VARCHAR}, #{targetName,jdbcType=VARCHAR}, #{score1,jdbcType=DECIMAL}, 
+      #{score2,jdbcType=DECIMAL}, #{score3,jdbcType=DECIMAL}, #{score4,jdbcType=DECIMAL}, 
+      #{score5,jdbcType=DECIMAL}, #{scoreFinal,jdbcType=DECIMAL}, #{imgCount,jdbcType=INTEGER}, 
+      #{replyCount,jdbcType=INTEGER}, #{likeCount,jdbcType=INTEGER}, #{unlikeCount,jdbcType=INTEGER}, 
+      #{againstCount,jdbcType=INTEGER}, #{againstState,jdbcType=VARCHAR}, #{ownerUserId,jdbcType=VARCHAR}, 
+      #{avatar,jdbcType=VARCHAR}, #{ownerUserLoginName,jdbcType=VARCHAR}, #{ownerUserNickName,jdbcType=VARCHAR}, 
+      #{targetUserId,jdbcType=VARCHAR}, #{targetUserNickName,jdbcType=VARCHAR}, #{stick,jdbcType=INTEGER}, 
+      #{highlight,jdbcType=INTEGER}, #{auditState,jdbcType=INTEGER}, #{delState,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=BIGINT}, #{shardingId,jdbcType=VARCHAR}, #{residentialId,jdbcType=VARCHAR}, 
+      #{residentialName,jdbcType=VARCHAR}, #{updateTime,jdbcType=BIGINT}, #{commentTag,jdbcType=VARCHAR}, 
+      #{terminal,jdbcType=VARCHAR}, #{againstTime,jdbcType=BIGINT}, #{districtId,jdbcType=VARCHAR}, 
+      #{districtName,jdbcType=VARCHAR}, #{pinyin,jdbcType=VARCHAR}, #{publicTime,jdbcType=BIGINT}, 
+      #{content,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.example.demo.domain.Comment" >
+    insert into comment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="pId != null" >
+        p_id,
+      </if>
+      <if test="targetType != null" >
+        target_type,
+      </if>
+      <if test="targetId != null" >
+        target_id,
+      </if>
+      <if test="targetName != null" >
+        target_name,
+      </if>
+      <if test="score1 != null" >
+        score_1,
+      </if>
+      <if test="score2 != null" >
+        score_2,
+      </if>
+      <if test="score3 != null" >
+        score_3,
+      </if>
+      <if test="score4 != null" >
+        score_4,
+      </if>
+      <if test="score5 != null" >
+        score_5,
+      </if>
+      <if test="scoreFinal != null" >
+        score_final,
+      </if>
+      <if test="imgCount != null" >
+        img_count,
+      </if>
+      <if test="replyCount != null" >
+        reply_count,
+      </if>
+      <if test="likeCount != null" >
+        like_count,
+      </if>
+      <if test="unlikeCount != null" >
+        unlike_count,
+      </if>
+      <if test="againstCount != null" >
+        against_count,
+      </if>
+      <if test="againstState != null" >
+        against_state,
+      </if>
+      <if test="ownerUserId != null" >
+        owner_user_id,
+      </if>
+      <if test="avatar != null" >
+        avatar,
+      </if>
+      <if test="ownerUserLoginName != null" >
+        owner_user_login_name,
+      </if>
+      <if test="ownerUserNickName != null" >
+        owner_user_nick_name,
+      </if>
+      <if test="targetUserId != null" >
+        target_user_id,
+      </if>
+      <if test="targetUserNickName != null" >
+        target_user_nick_name,
+      </if>
+      <if test="stick != null" >
+        stick,
+      </if>
+      <if test="highlight != null" >
+        highlight,
+      </if>
+      <if test="auditState != null" >
+        audit_state,
+      </if>
+      <if test="delState != null" >
+        del_state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="shardingId != null" >
+        sharding_id,
+      </if>
+      <if test="residentialId != null" >
+        residential_id,
+      </if>
+      <if test="residentialName != null" >
+        residential_name,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="commentTag != null" >
+        comment_tag,
+      </if>
+      <if test="terminal != null" >
+        terminal,
+      </if>
+      <if test="againstTime != null" >
+        against_time,
+      </if>
+      <if test="districtId != null" >
+        district_id,
+      </if>
+      <if test="districtName != null" >
+        district_name,
+      </if>
+      <if test="pinyin != null" >
+        pinyin,
+      </if>
+      <if test="publicTime != null" >
+        public_time,
+      </if>
+      <if test="content != null" >
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="pId != null" >
+        #{pId,jdbcType=VARCHAR},
+      </if>
+      <if test="targetType != null" >
+        #{targetType,jdbcType=INTEGER},
+      </if>
+      <if test="targetId != null" >
+        #{targetId,jdbcType=VARCHAR},
+      </if>
+      <if test="targetName != null" >
+        #{targetName,jdbcType=VARCHAR},
+      </if>
+      <if test="score1 != null" >
+        #{score1,jdbcType=DECIMAL},
+      </if>
+      <if test="score2 != null" >
+        #{score2,jdbcType=DECIMAL},
+      </if>
+      <if test="score3 != null" >
+        #{score3,jdbcType=DECIMAL},
+      </if>
+      <if test="score4 != null" >
+        #{score4,jdbcType=DECIMAL},
+      </if>
+      <if test="score5 != null" >
+        #{score5,jdbcType=DECIMAL},
+      </if>
+      <if test="scoreFinal != null" >
+        #{scoreFinal,jdbcType=DECIMAL},
+      </if>
+      <if test="imgCount != null" >
+        #{imgCount,jdbcType=INTEGER},
+      </if>
+      <if test="replyCount != null" >
+        #{replyCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null" >
+        #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="unlikeCount != null" >
+        #{unlikeCount,jdbcType=INTEGER},
+      </if>
+      <if test="againstCount != null" >
+        #{againstCount,jdbcType=INTEGER},
+      </if>
+      <if test="againstState != null" >
+        #{againstState,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerUserId != null" >
+        #{ownerUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerUserLoginName != null" >
+        #{ownerUserLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerUserNickName != null" >
+        #{ownerUserNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="targetUserId != null" >
+        #{targetUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="targetUserNickName != null" >
+        #{targetUserNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="stick != null" >
+        #{stick,jdbcType=INTEGER},
+      </if>
+      <if test="highlight != null" >
+        #{highlight,jdbcType=INTEGER},
+      </if>
+      <if test="auditState != null" >
+        #{auditState,jdbcType=INTEGER},
+      </if>
+      <if test="delState != null" >
+        #{delState,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="shardingId != null" >
+        #{shardingId,jdbcType=VARCHAR},
+      </if>
+      <if test="residentialId != null" >
+        #{residentialId,jdbcType=VARCHAR},
+      </if>
+      <if test="residentialName != null" >
+        #{residentialName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="commentTag != null" >
+        #{commentTag,jdbcType=VARCHAR},
+      </if>
+      <if test="terminal != null" >
+        #{terminal,jdbcType=VARCHAR},
+      </if>
+      <if test="againstTime != null" >
+        #{againstTime,jdbcType=BIGINT},
+      </if>
+      <if test="districtId != null" >
+        #{districtId,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null" >
+        #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyin != null" >
+        #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="publicTime != null" >
+        #{publicTime,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.example.demo.domain.Comment" >
+    update comment
+    <set >
+      <if test="pId != null" >
+        p_id = #{pId,jdbcType=VARCHAR},
+      </if>
+      <if test="targetType != null" >
+        target_type = #{targetType,jdbcType=INTEGER},
+      </if>
+      <if test="targetId != null" >
+        target_id = #{targetId,jdbcType=VARCHAR},
+      </if>
+      <if test="targetName != null" >
+        target_name = #{targetName,jdbcType=VARCHAR},
+      </if>
+      <if test="score1 != null" >
+        score_1 = #{score1,jdbcType=DECIMAL},
+      </if>
+      <if test="score2 != null" >
+        score_2 = #{score2,jdbcType=DECIMAL},
+      </if>
+      <if test="score3 != null" >
+        score_3 = #{score3,jdbcType=DECIMAL},
+      </if>
+      <if test="score4 != null" >
+        score_4 = #{score4,jdbcType=DECIMAL},
+      </if>
+      <if test="score5 != null" >
+        score_5 = #{score5,jdbcType=DECIMAL},
+      </if>
+      <if test="scoreFinal != null" >
+        score_final = #{scoreFinal,jdbcType=DECIMAL},
+      </if>
+      <if test="imgCount != null" >
+        img_count = #{imgCount,jdbcType=INTEGER},
+      </if>
+      <if test="replyCount != null" >
+        reply_count = #{replyCount,jdbcType=INTEGER},
+      </if>
+      <if test="likeCount != null" >
+        like_count = #{likeCount,jdbcType=INTEGER},
+      </if>
+      <if test="unlikeCount != null" >
+        unlike_count = #{unlikeCount,jdbcType=INTEGER},
+      </if>
+      <if test="againstCount != null" >
+        against_count = #{againstCount,jdbcType=INTEGER},
+      </if>
+      <if test="againstState != null" >
+        against_state = #{againstState,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerUserId != null" >
+        owner_user_id = #{ownerUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null" >
+        avatar = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerUserLoginName != null" >
+        owner_user_login_name = #{ownerUserLoginName,jdbcType=VARCHAR},
+      </if>
+      <if test="ownerUserNickName != null" >
+        owner_user_nick_name = #{ownerUserNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="targetUserId != null" >
+        target_user_id = #{targetUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="targetUserNickName != null" >
+        target_user_nick_name = #{targetUserNickName,jdbcType=VARCHAR},
+      </if>
+      <if test="stick != null" >
+        stick = #{stick,jdbcType=INTEGER},
+      </if>
+      <if test="highlight != null" >
+        highlight = #{highlight,jdbcType=INTEGER},
+      </if>
+      <if test="auditState != null" >
+        audit_state = #{auditState,jdbcType=INTEGER},
+      </if>
+      <if test="delState != null" >
+        del_state = #{delState,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=BIGINT},
+      </if>
+      <if test="shardingId != null" >
+        sharding_id = #{shardingId,jdbcType=VARCHAR},
+      </if>
+      <if test="residentialId != null" >
+        residential_id = #{residentialId,jdbcType=VARCHAR},
+      </if>
+      <if test="residentialName != null" >
+        residential_name = #{residentialName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=BIGINT},
+      </if>
+      <if test="commentTag != null" >
+        comment_tag = #{commentTag,jdbcType=VARCHAR},
+      </if>
+      <if test="terminal != null" >
+        terminal = #{terminal,jdbcType=VARCHAR},
+      </if>
+      <if test="againstTime != null" >
+        against_time = #{againstTime,jdbcType=BIGINT},
+      </if>
+      <if test="districtId != null" >
+        district_id = #{districtId,jdbcType=VARCHAR},
+      </if>
+      <if test="districtName != null" >
+        district_name = #{districtName,jdbcType=VARCHAR},
+      </if>
+      <if test="pinyin != null" >
+        pinyin = #{pinyin,jdbcType=VARCHAR},
+      </if>
+      <if test="publicTime != null" >
+        public_time = #{publicTime,jdbcType=BIGINT},
+      </if>
+      <if test="content != null" >
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.example.demo.domain.Comment" >
+    update comment
+    set p_id = #{pId,jdbcType=VARCHAR},
+      target_type = #{targetType,jdbcType=INTEGER},
+      target_id = #{targetId,jdbcType=VARCHAR},
+      target_name = #{targetName,jdbcType=VARCHAR},
+      score_1 = #{score1,jdbcType=DECIMAL},
+      score_2 = #{score2,jdbcType=DECIMAL},
+      score_3 = #{score3,jdbcType=DECIMAL},
+      score_4 = #{score4,jdbcType=DECIMAL},
+      score_5 = #{score5,jdbcType=DECIMAL},
+      score_final = #{scoreFinal,jdbcType=DECIMAL},
+      img_count = #{imgCount,jdbcType=INTEGER},
+      reply_count = #{replyCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      unlike_count = #{unlikeCount,jdbcType=INTEGER},
+      against_count = #{againstCount,jdbcType=INTEGER},
+      against_state = #{againstState,jdbcType=VARCHAR},
+      owner_user_id = #{ownerUserId,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      owner_user_login_name = #{ownerUserLoginName,jdbcType=VARCHAR},
+      owner_user_nick_name = #{ownerUserNickName,jdbcType=VARCHAR},
+      target_user_id = #{targetUserId,jdbcType=VARCHAR},
+      target_user_nick_name = #{targetUserNickName,jdbcType=VARCHAR},
+      stick = #{stick,jdbcType=INTEGER},
+      highlight = #{highlight,jdbcType=INTEGER},
+      audit_state = #{auditState,jdbcType=INTEGER},
+      del_state = #{delState,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      sharding_id = #{shardingId,jdbcType=VARCHAR},
+      residential_id = #{residentialId,jdbcType=VARCHAR},
+      residential_name = #{residentialName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      comment_tag = #{commentTag,jdbcType=VARCHAR},
+      terminal = #{terminal,jdbcType=VARCHAR},
+      against_time = #{againstTime,jdbcType=BIGINT},
+      district_id = #{districtId,jdbcType=VARCHAR},
+      district_name = #{districtName,jdbcType=VARCHAR},
+      pinyin = #{pinyin,jdbcType=VARCHAR},
+      public_time = #{publicTime,jdbcType=BIGINT},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.example.demo.domain.Comment" >
+    update comment
+    set p_id = #{pId,jdbcType=VARCHAR},
+      target_type = #{targetType,jdbcType=INTEGER},
+      target_id = #{targetId,jdbcType=VARCHAR},
+      target_name = #{targetName,jdbcType=VARCHAR},
+      score_1 = #{score1,jdbcType=DECIMAL},
+      score_2 = #{score2,jdbcType=DECIMAL},
+      score_3 = #{score3,jdbcType=DECIMAL},
+      score_4 = #{score4,jdbcType=DECIMAL},
+      score_5 = #{score5,jdbcType=DECIMAL},
+      score_final = #{scoreFinal,jdbcType=DECIMAL},
+      img_count = #{imgCount,jdbcType=INTEGER},
+      reply_count = #{replyCount,jdbcType=INTEGER},
+      like_count = #{likeCount,jdbcType=INTEGER},
+      unlike_count = #{unlikeCount,jdbcType=INTEGER},
+      against_count = #{againstCount,jdbcType=INTEGER},
+      against_state = #{againstState,jdbcType=VARCHAR},
+      owner_user_id = #{ownerUserId,jdbcType=VARCHAR},
+      avatar = #{avatar,jdbcType=VARCHAR},
+      owner_user_login_name = #{ownerUserLoginName,jdbcType=VARCHAR},
+      owner_user_nick_name = #{ownerUserNickName,jdbcType=VARCHAR},
+      target_user_id = #{targetUserId,jdbcType=VARCHAR},
+      target_user_nick_name = #{targetUserNickName,jdbcType=VARCHAR},
+      stick = #{stick,jdbcType=INTEGER},
+      highlight = #{highlight,jdbcType=INTEGER},
+      audit_state = #{auditState,jdbcType=INTEGER},
+      del_state = #{delState,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=BIGINT},
+      sharding_id = #{shardingId,jdbcType=VARCHAR},
+      residential_id = #{residentialId,jdbcType=VARCHAR},
+      residential_name = #{residentialName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=BIGINT},
+      comment_tag = #{commentTag,jdbcType=VARCHAR},
+      terminal = #{terminal,jdbcType=VARCHAR},
+      against_time = #{againstTime,jdbcType=BIGINT},
+      district_id = #{districtId,jdbcType=VARCHAR},
+      district_name = #{districtName,jdbcType=VARCHAR},
+      pinyin = #{pinyin,jdbcType=VARCHAR},
+      public_time = #{publicTime,jdbcType=BIGINT}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+
+  <select id="getlist" resultMap="BaseResultMap">
+    SELECT * from `comment`
+    limit 10
+  </select>
+
+</mapper>
